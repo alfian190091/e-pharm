@@ -327,3 +327,7 @@ a {
 .detail table{
 	margin: 0 auto;
 }
+
+span{
+	color:red;
+}

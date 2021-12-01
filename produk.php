@@ -1,6 +1,4 @@
-<?php
-    require "koneksi.php";
-?>
+
 <html>
 	<head>
 			<title>Home</title>
@@ -35,6 +33,7 @@
 	<div class="containerbarang">
 	<h2>Produk Kami</h2><br><br>
 			<table>
+				
 				<tr>
 					<td>
 						<h3>Nama Produk</h3><br>

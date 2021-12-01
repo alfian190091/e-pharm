@@ -65,14 +65,10 @@
             //Ketika Validasi sudah 7 atau benar semua
             if ($a == 5){
                 //Query untuk menambahkan USER
-                $statement=$kon->prepare("INSERT INTO user (NULL, USERNAME, PASSWORD, ALAMAT, EMAIL, NOHP) VALUES (NULL, :USERNAME, :PASSWORD, :ALAMAT, :EMAIL, :NOHP)");
-              
-          
+                $statement=$kon->prepare("INSERT INTO user ( USERNAME, EMAIL, ALAMAT, NOHP, PASSWORD) VALUES (:USERNAME, :EMAIL, :ALAMAT, :NOHP, :PASSWORD)");
                 $statement->bindValue(':USERNAME', $_POST['USERNAME']);
                 $statement->bindValue(':PASSWORD', $_POST['PASSWORD']);
-         
                 $statement->bindValue(':ALAMAT', $_POST['ALAMAT']);
-              
                 $statement->bindValue(':EMAIL', $_POST['EMAIL']);
                 $statement->bindValue(':NOHP', $_POST['NOHP']);
                 $statement->execute();
@@ -97,8 +93,11 @@
     <body>
         <div class="container">
           <h1 align="center">Register</h1>
-            <form>
-                <label>Username</label>
+            <form method="POST">
+                <?php if(isset($error)):?>
+                    <h3 style='color:green; font-style:italic;'>*Data user berhasil ditambahkan</h3>
+                <?php endif; ?>
+                <label>USERNAME</label>
 				<span><?php echo $USERNAME_err; ?></span>
                 <input type="text" name="USERNAME" value="<?php if(isset($_POST['USERNAME'])){echo $_POST['USERNAME'];} ?>">
                 <br>
