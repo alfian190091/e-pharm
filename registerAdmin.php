@@ -69,7 +69,7 @@
             if ($a == 5){
                 //Query untuk menambahkan USER
                 $statement=$kon->prepare("INSERT INTO account (id_akses, nama, alamat, id_wilayah, notelp, email, pass) VALUES (:id_akses, :nama, :alamat, :id_wilayah, :notelp, :email, :pass)");
-                $statement->bindValue(':id_akses', '2');
+                $statement->bindValue(':id_akses', '1');
                 $statement->bindValue(':nama', $_POST['nama']);
                 $statement->bindValue(':alamat', $_POST['alamat']);
                 $statement->bindValue(':id_wilayah', $_POST['id_wilayah']);
