@@ -1,4 +1,9 @@
 <?php
-    //Koneksi ke database socmed, username root password tidak ada
-    $kon=new PDO('mysql:host=localhost;dbname=apotek','root','');
+    $hostname = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "apotek";
+    
+    
+    $conn = new mysqli($hostname,$username,$password,$database);
 ?>

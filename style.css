@@ -196,48 +196,52 @@ a {
 	padding: 20px;
 	
 	margin-right: 20px;
-	width: 1000px;
+	width: 1030px;
 
 	float: right;
 	background-color: white;
 	opacity:0.8;
 }
 .containerbarang h2{
+	margin-bottom: 20px;
 	padding-top: 20px;
 	text-align: center;
 	color : green;
 	font-family:Matura MT Script Capitals;
 
-}
-.containerbarang table{
-	margin: 0 auto;
-}
-.containerbarang table td{
-	padding-left: 70px;
-	padding-right: 70px;
+} 
+.produk{
+	
+	float: left;
+	width:230px;
+	height:400px;
+	margin-left: 90px;
+	margin-bottom: 70px;
+	
 	
 }
-.containerbarang table td img{
+
+.produk img{
 	width: 200px;
 	height: 250px;
 }
-.containerbarang table h3{
+.produk h3{
 	font-family: 'Times New Roman', Times, serif;
 	text-align:  center;
-	border-bottom: 2px solid green;
+	border-bottom: 3px solid green;
 }
 
-.containerbarang table p {
+.produk p {
 	font-family: 'Times New Roman', Times, serif;
 }
 
-.containerbarang table button{
+.produk button{
 	background-color: rgb(54, 165, 128);
 	color: white;
 	font-family: 'Times New Roman', Times, serif;
 	padding: 10px;
 	border-radius: 10px;
-	margin: 0 auto;
+	align-items: center;
 }
 
 .keranjang{

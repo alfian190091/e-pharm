@@ -11,14 +11,9 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav>
-		<h1>E-Pharm</h1>
-		<h3><a href="login.php">Log in</a></h3>
-        <h3><a href="checkout.php">Checkout</a></h3>
-		<h3><a href="keranjang.php">Keranjang</a></h3>
-		<h3><a href="produk.php">Produk</a></h3>
-		<h3><a href="index.php">Home</a></h3>
-	</nav>
+    <?php
+		require "navbar.php";
+	?>
     <br><br><br>
     <div class="keranjang">
         <h3>Keranjang Anda</h3><br><br>

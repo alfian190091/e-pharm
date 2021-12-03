@@ -1,3 +1,4 @@
+
 <?php
     require "koneksi.php";
 	require 'validasi.php';
@@ -6,10 +7,10 @@
     //Jumlah Validasi yang berhasil dilewati
     $a="";
 
-    //ketika tombol SUBMIT di klik
-	if(isset($_POST['SUBMIT'])){
-        try{
-            $kon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //ketika tombol register di klik
+	if(isset($_POST['register'])){
+       
+           
            
             //Validasi
             if (empty($_POST['nama'])) {
@@ -67,25 +68,30 @@
            
             //Ketika Validasi sudah 7 atau benar semua
             if ($a == 5){
-                //Query untuk menambahkan USER
-                $statement=$kon->prepare("INSERT INTO account (id_akses, nama, alamat, id_wilayah, notelp, email, pass) VALUES (:id_akses, :nama, :alamat, :id_wilayah, :notelp, :email, :pass)");
-                $statement->bindValue(':id_akses', '2');
-                $statement->bindValue(':nama', $_POST['nama']);
-                $statement->bindValue(':alamat', $_POST['alamat']);
-                $statement->bindValue(':id_wilayah', $_POST['id_wilayah']);
-                $statement->bindValue(':notelp', $_POST['notelp']);
-                $statement->bindValue(':email', $_POST['email']);
-                $statement->bindValue(':pass', $_POST['pass']);
-                $statement->execute();
-                
-                //Menampilkan pesan berhasil
-                $error=false;
+            
+                function registrasi($data){
+                    global $conn;
+                    $id_akses="2";
+                    $nama = $data["nama"];
+                    $alamat = $data["alamat"];
+                    $wilayah = $data["id_wilayah"];
+                    $notelp = $data["notelp"];
+                    $email = $data["email"];
+                    $pass = $data["pass"];
+
+                mysqli_query($conn, "INSERT INTO account VALUES('', '$id_akses','$nama', '$alamat', '$wilayah','$notelp', '$email', '$pass' )");
+                return mysqli_affected_rows($conn);
+                }
+
+                if(registrasi($_POST)>0){
+                    $error=false; 
+
+                }
             
             }
-        }
-        catch(PDOException $e){
-            echo $e->getMessage();
-        }	
+        
+        
+  	
     }	
 ?>
 <!DOCTYPE HTML>
@@ -98,7 +104,7 @@
     <body>
         <div class="container">
           <h1 align="center">Register</h1>
-            <form method="POST">
+            <form method="POST" action="">
                 <?php if(isset($error)):?>
                     <h3 style='color:green; font-style:italic;'>*Data user berhasil ditambahkan</h3>
                 <?php endif; ?>
@@ -135,7 +141,7 @@
 				<span><?php echo $password_err; ?></span>
                 <input type="password" name="pass" value="<?php if(isset($_POST['PASSWORD'])){echo $_POST['PASSWORD'];} ?>">
                 <br>
-                <button type="submit" name="SUBMIT">Register</button>
+                <button type="submit" name="register">Register</button>
                 <p> Sudah punya akun?
                   <a href="login.php">Login di sini</a>
                 </p>

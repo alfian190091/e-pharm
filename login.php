@@ -1,58 +1,19 @@
 <?php
 session_start();
-if(isset($_POST['Login'])){
-    //mengambil nilai username dan password dari form
-    $email=$_POST['email'];
-    $pass=$_POST['pass'];
-    //Function checkPassword untuk mengecek username dan password
-    function checkPassword($email, $pass){
-        require "koneksi.php";
-        $statement=$kon->prepare("SELECT*FROM account WHERE email=:email and pass=:pass");
-        $statement->bindValue(':email', $email);
-        $statement->bindValue(':pass', $pass);
-        $statement->execute();
-        foreach($statement as $data){
-          $id_account = $data[0];
-        }
-        //Mengecek jumlah baris
-        return $statement->rowCount()>0;
-    }
-    //Jika hasil true
-    if(checkPassword($email, $pass)==true){
-        //mulai session
-        require "koneksi.php";
-        //Mengset session diberikan nilai true
-        $statement=$kon->prepare("SELECT*FROM account WHERE email=:email and pass=:pass");
-        $statement->bindValue(':email', $email);
-        $statement->bindValue(':pass', $pass);
-        $statement->execute();
-        foreach($statement as $data){
-          $id_account = $data[0];
-          $id_akses = $data[1];
-          $nama=$data[2];
-          $id_wilayah= $data[4];
+require "koneksi.php";
 
-        }
-        $_SESSION['id_account']=$id_account;
-        $_SESSION['nama']=$nama;
-        $_SESSION['id_akses']=$id_akses;
-        $_SESSION['id_wilayah']=$id_wilayah;
-        //Alihkan ke halaman beranda.php
-        header('Location:produk.php');
-    }
-    //Jika False
-    $errorlogin=true;
+if(isset($_POST["Login"])){
+  $email=$_POST["email"];
+  $pass =$_POST["pass"];
+
+  $result=mysqli_query($conn, "SELECT * FROM account where email='$email' AND pass='$pass'");
+  if(mysqli_num_rows($result) === 1 ){
+      $_SESSION['login']=true;
+      header("Location:produk.php");
+      exit;
   }
-  //Ketika tombol DaftarAdmin diklik
-  if(isset($_POST['DaftarAdmin'])){
-    //Jika kodeAdminnya benar maka akan diarahkan ke halaman registerAdmin
-    if($_POST['kodeAdmin']=="adminku"){
-        header('Location:registerAdmin.php');
-        $_SESSION['KodeAdmin']=$_POST['kodeAdmin'];
-    }
-    //Menampilkan pesan Kode Salah
-    $erroradmin=true;
-  }
+  $errorlogin=true;
+}
 ?>
 <!DOCTYPE HTML>
 <html>
