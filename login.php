@@ -7,11 +7,15 @@ if(isset($_POST["Login"])){
   $pass =$_POST["pass"];
 
   $result=mysqli_query($conn, "SELECT * FROM account where email='$email' AND pass='$pass'");
-  if(mysqli_num_rows($result) === 1 ){
+  $cek=mysqli_num_rows($result) ;
+  if($cek > 0 ){
+      $data_user = mysqli_fetch_assoc($result);
       $_SESSION['login']=true;
+      $_SESSION['id_account']= $data_user['id_account'];
       header("Location:produk.php");
       exit;
   }
+  
   $errorlogin=true;
 }
 ?>

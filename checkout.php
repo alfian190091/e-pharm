@@ -1,5 +1,6 @@
 <?php
-    require "koneksi.php";
+    include "koneksi.php";
+ 
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,6 +30,9 @@
                     <center>Total Harga</center>
                 </th>
                 <th>
+                    <center>Status</center>
+                </th>
+                <th>
                     <center>Opsi</center>
                 </th>
             </tr>
@@ -41,6 +45,9 @@
                 </td>
                 <td>
                     <center>Rp 10000</center>
+                </td>
+                <td>
+                    <center>Belum bayar</center>
                 </td>
                 <td>
                 <button><b>Batal</b></button>

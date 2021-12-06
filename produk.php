@@ -1,8 +1,9 @@
 <?php
 
 require "koneksi.php";
-$id_penyakit = isset($_GET['id_penyakit']) ? $_GET['id_penyakit'] : '';
 
+$id_penyakit = isset($_GET['id_penyakit']) ? $_GET['id_penyakit'] : '';
+$id_obat= isset($_GET['id_obat']) ? $_GET['id_obat'] : '';
 
 $query  = mysqli_query($conn, "SELECT * FROM penyakit ORDER BY id_penyakit ASC");
 $query3 = mysqli_query($conn, "SELECT  *
@@ -14,26 +15,9 @@ $query4 = mysqli_query($conn, "SELECT  *
 								FROM obat, penyakit
 								WHERE obat.id_penyakit	= penyakit.id_penyakit	
 								ORDER BY id_obat ASC");
-//menambah data ke keranjang
-if(isset($_POST['keranjang'])){
-	function keranjang($row_ast){
-		global $conn;
-		
-		$id_account = '1';
-		$id_obat = $row_ast["id_obat"];
-		$bnyk_obat = '1';
-		$total_harga = $row_ast["harga"];
-		
 
-	mysqli_query($conn, "INSERT INTO keranjang VALUES('','$id_account', '$id_obat', '$bnyk_obat','$total_harga')");
-	return mysqli_affected_rows($conn);
-	}
-
-	if(keranjang($_POST)>0){
-		$error=false; 
-
-	}
-}
+// $query5 = mysqli_query($conn, "INSERT  INTO keranjang VALUES ('', '$id_account', '$id_obat', '$bnyk_obat', '$total_harga' )";
+							
 ?>
 
 <!DOCTYPE html>
@@ -48,7 +32,9 @@ if(isset($_POST['keranjang'])){
 <body>
 	<?php
 		require "navbar.php";
+		
 	?>
+	<?php var_dump($_SESSION['id_account'])?>
 	<br><br><br><br>
 	<div class="kategori">
 		<h2>Kategori</h2>
@@ -76,19 +62,19 @@ if(isset($_POST['keranjang'])){
 						<?php while($row_ast = mysqli_fetch_array($query3)) { ?>
 							
 					<div class="produk">
-						<form method="POST" action="">
+						
 						<h3><?php echo $row_ast["nmobat"] ?></h3><br>
-						<img src="produk/batuk/benadrly.jpg" alt=""><br>
+						<img src="produk/<?php echo $row_ast["gambar"] ?>" alt=""><br>
 						<p><?php echo $row_ast["deskripsi"] ?></p><br>
 						<h4>Rp. <?php echo $row_ast["harga"] ?></h4><br>
 						<button>Beli</button>
-						<a href="keranjang.php?&id_obat=<?php echo $row_jnsk['id_obat']; ?>"><button>Keranjang</button></a>
-
+						<a href="do_tambah.php?&id_obat=<?php echo $row_ast['id_obat']; ?>"><button>Keranjang</button></a>
+							
 						<!-- <button type="submit" name="keranjang">Keranjang</button> -->
 						<?php if(isset($error)):?>
 							<h3 style='color:green; font-style:italic;'>*Data berhasil ditambahkan</h3>
 						<?php endif; ?>
-						</form>
+						
 					
 					</div>
 					
@@ -102,11 +88,11 @@ if(isset($_POST['keranjang'])){
 					
 					<div class="produk">
 						<h3><?php echo $row_ast["nmobat"] ?></h3><br>
-						<img src="produk/batuk/benadrly.jpg" alt=""><br>
+						<img src="produk/<?php echo $row_ast["gambar"] ?>" alt=""><br>
 						<p><?php echo $row_ast["deskripsi"] ?></p><br>
 						<h4>Rp. <?php echo $row_ast["harga"] ?></h4><br>
 						<button>Beli</button>
-						<a href="keranjang.php?&id_obat=<?php echo $row_jnsk['id_obat']; ?>"><button>Keranjang</button></a>
+						<a href="do_tambah.php?&id_obat=<?php echo $row_ast['id_obat']; ?>"><button>Keranjang</button></a>
 
 					
 					</div>

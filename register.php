@@ -66,7 +66,7 @@
             
             
            
-            //Ketika Validasi sudah 7 atau benar semua
+            //Ketika Validasi sudah 5 atau benar semua
             if ($a == 5){
             
                 function registrasi($data){
